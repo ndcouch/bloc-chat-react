@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import App from "../App.js";
+import RoomList from "./RoomList.js";
 //import { runInNewContext } from "vm";
 
 class MessageList extends Component {
@@ -29,3 +30,5 @@ class MessageList extends Component {
     this.setState({ newMessage: e.target.value });
   }
 }
+
+export default RoomList;
