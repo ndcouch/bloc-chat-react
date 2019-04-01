@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import App from "../App.js";
 //import { runInNewContext } from "vm";
 
-/*handleclick() {} //click on rooms
-
-componentdidmount() {} //probably 
-*/
 class MessageList extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +10,7 @@ class MessageList extends Component {
       groupedMessages: [],
       newMessage: ""
     };
-    this.messageReg = this.props.firebase.database().ref("messages");
+    this.messageRef = this.props.firebase.database().ref("messages");
   }
 
   createMessage(e) {
@@ -27,5 +23,9 @@ class MessageList extends Component {
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP
     });
     this.setState({ newMessage: "" });
+  }
+
+  handleChange(e) {
+    this.setState({ newMessage: e.target.value });
   }
 }
