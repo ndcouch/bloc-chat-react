@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import RoomList from "./components/RoomList.js";
 import * as firebase from "firebase";
+import MessageList from "./components/MessageList.js";
 
 // Initialize Firebase
 var config = {
