@@ -20,6 +20,7 @@ class App extends Component {
     return (
       <div className="App">
         <RoomList firebase={fb} />
+        <MessageList firebase={fb} />
       </div>
     );
   }

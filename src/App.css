@@ -1,4 +1,16 @@
-.App {
+.list-rooms {
+  /*text-align: left;*/
+  float: left;
+  max-width: 25%;
+  max-height: 100%;
+  background-color: lightblue;
+}
+
+.rooms-header {
+  text-align: center;
+}
+
+/*.App {
   text-align: center;
 }
 
@@ -31,3 +43,4 @@
     transform: rotate(360deg);
   }
 }
+*/

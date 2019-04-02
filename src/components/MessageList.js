@@ -29,6 +29,22 @@ class MessageList extends Component {
   handleChange(e) {
     this.setState({ newMessage: e.target.value });
   }
+
+  componentDidMount() {
+    this.messageRef.on("child_added", snapshot => {
+      const msg = snapshot.val();
+      msg.key = snapshot.key;
+      this.setState({ messages: this.state.messages.concat(msg) });
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Messages</h2>
+      </div>
+    );
+  }
 }
 
-export default RoomList;
+export default MessageList;
