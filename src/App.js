@@ -21,6 +21,7 @@ class App extends Component {
     this.state = {
       activeRoom: ""
     };
+    this.changeRoom = this.changeRoom.bind(this);
   }
 
   changeRoom(room) {
@@ -30,13 +31,34 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <header />
+        <main>
+          <div className="container-fluid">
+            <div className="row>">
+              <div className="col-xs-4">
+                <RoomList
+                  firebase={firebase}
+                  changeRoom={room => this.changeRoom(room)}
+                />
+              </div>
+              <div className="col-xs-6">
+                <MessageList
+                  firebase={firebase}
+                  activeRoom={this.state.activeRoom}
+                />
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+      /*<div className="App">
         <RoomList
           firebase={fb}
           activeRoom={this.state.activeRoom}
           changeRoom={room => this.changeRoom(room)}
         />
         <MessageList firebase={fb} activeRoom={this.state.activeRoom} />
-      </div>
+      </div>*/
     );
   }
 }

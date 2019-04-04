@@ -12,13 +12,15 @@ class MessageList extends Component {
       newMessage: ""
     };
     this.messageRef = this.props.firebase.database().ref("messages");
+    this.handleChange = this.handleChange.bind(this);
+    this.createMessage = this.createMessage.bind(this);
   }
 
   createMessage(e) {
     e.preventDefault();
     const newMsg = this.state.newMessage;
     this.messageRef.push({
-      username: this.props.currentUser.displayName,
+      //username: this.props.currentUser,
       content: newMsg,
       roomId: this.props.activeRoom,
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP
@@ -38,9 +40,42 @@ class MessageList extends Component {
     });
   }
 
+  getMessages() {
+    this.setState({
+      groupedMessages: this.state.messages.filter(
+        message => message.room === this.props.activeRoom.key
+      )
+    });
+  }
+
   render() {
     return (
-      <div>
+      <div className="messageList">
+        <h2 className="main-header">Title</h2>
+        {this.state.groupedMessages.map(message => (
+          <div className="message" key={message.key}>
+            <p className="content">{message.content}</p>
+            <p className="username">{message.username}</p>
+            <p className="sentAt">Sent at: {message.sentAt}</p>
+          </div>
+        ))}
+
+        <div id="message-form">
+          <form onSubmit={e => this.createMessage(e)}>
+            <input
+              id="message-field"
+              type="text"
+              value={this.state.newMessage}
+              onChange={e => this.handleChange(e)}
+            />
+            <button id="message-btn" type="submit">
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+
+      /*<div>
         <h2>Messages</h2>
         <form onSubmit={e => this.createMessage(e)}>
           <label>New Message</label>
@@ -51,7 +86,7 @@ class MessageList extends Component {
           />
           <input type="submit" />
         </form>
-      </div>
+      </div>*/
     );
   }
 }
