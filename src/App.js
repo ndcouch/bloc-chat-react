@@ -24,7 +24,7 @@ class App extends Component {
   }
 
   changeRoom(room) {
-    this.setState({ activeRoom: room.key });
+    this.setState({ activeRoom: room });
   }
 
   render() {
@@ -33,7 +33,7 @@ class App extends Component {
         <RoomList
           firebase={fb}
           activeRoom={this.state.activeRoom}
-          changeRoom={this.changeRoom(room)}
+          changeRoom={room => this.changeRoom(room)}
         />
         <MessageList firebase={fb} activeRoom={this.state.activeRoom} />
       </div>
