@@ -42,6 +42,15 @@ class MessageList extends Component {
     return (
       <div>
         <h2>Messages</h2>
+        <form onSubmit={e => this.createMessage(e)}>
+          <label>New Message</label>
+          <input
+            type="text"
+            value={this.state.newMessage}
+            onChange={e => this.handleChange(e)}
+          />
+          <input type="submit" />
+        </form>
       </div>
     );
   }
