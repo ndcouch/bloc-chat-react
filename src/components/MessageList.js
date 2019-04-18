@@ -20,7 +20,7 @@ class MessageList extends Component {
     e.preventDefault();
     const newMsg = this.state.newMessage;
     this.messageRef.push({
-      //username: this.props.currentUser,
+      username: "username here",
       content: newMsg,
       roomId: this.props.activeRoom,
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP
@@ -40,53 +40,31 @@ class MessageList extends Component {
     });
   }
 
-  getMessages() {
-    this.setState({
-      groupedMessages: this.state.messages.filter(
-        message => message.room === this.props.activeRoom.key
-      )
-    });
-  }
-
   render() {
     return (
-      <div className="messageList">
-        <h2 className="main-header">Title</h2>
+      <div>
+        <h2>Messages</h2>
         {this.state.groupedMessages.map(message => (
           <div className="message" key={message.key}>
             <p className="content">{message.content}</p>
-            <p className="username">{message.username}</p>
             <p className="sentAt">Sent at: {message.sentAt}</p>
           </div>
         ))}
 
-        <div id="message-form">
+        <div>
           <form onSubmit={e => this.createMessage(e)}>
             <input
-              id="message-field"
+              id="msg-text-field"
               type="text"
               value={this.state.newMessage}
               onChange={e => this.handleChange(e)}
             />
-            <button id="message-btn" type="submit">
+            <button id="submit-msg-button" type="submit">
               Send
             </button>
           </form>
         </div>
       </div>
-
-      /*<div>
-        <h2>Messages</h2>
-        <form onSubmit={e => this.createMessage(e)}>
-          <label>New Message</label>
-          <input
-            type="text"
-            value={this.state.newMessage}
-            onChange={e => this.handleChange(e)}
-          />
-          <input type="submit" />
-        </form>
-      </div>*/
     );
   }
 }

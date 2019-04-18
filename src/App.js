@@ -33,32 +33,20 @@ class App extends Component {
       <div className="App">
         <header />
         <main>
-          <div className="container-fluid">
-            <div className="row>">
-              <div className="col-xs-4">
-                <RoomList
-                  firebase={firebase}
-                  changeRoom={room => this.changeRoom(room)}
-                />
-              </div>
-              <div className="col-xs-6">
-                <MessageList
-                  firebase={firebase}
-                  activeRoom={this.state.activeRoom}
-                />
-              </div>
-            </div>
+          <div className="app-rooms">
+            <RoomList
+              firebase={firebase}
+              changeRoom={room => this.changeRoom(room)}
+            />
+          </div>
+          <div className="app-msg">
+            <MessageList
+              firebase={firebase}
+              activeRoom={this.state.activeRoom}
+            />
           </div>
         </main>
       </div>
-      /*<div className="App">
-        <RoomList
-          firebase={fb}
-          activeRoom={this.state.activeRoom}
-          changeRoom={room => this.changeRoom(room)}
-        />
-        <MessageList firebase={fb} activeRoom={this.state.activeRoom} />
-      </div>*/
     );
   }
 }

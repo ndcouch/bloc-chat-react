@@ -10,8 +10,8 @@ class RoomList extends Component {
     };
 
     this.roomsRef = this.props.firebase.database().ref("rooms");
-    this.createRoom = this.createRoom.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.createRoom = this.createRoom.bind(this);
   }
 
   componentWillMount() {
@@ -22,7 +22,6 @@ class RoomList extends Component {
     });
   }
 
-  // creates a new room
   createRoom(e) {
     e.preventDefault();
     this.roomsRef.push({ name: this.state.newRoom });
@@ -42,48 +41,24 @@ class RoomList extends Component {
 
   render() {
     return (
-      <div className="sidebar">
+      <div>
+        <h2>Rooms</h2>
         {this.state.rooms.map(room => (
-          <div className="room-list" key={room.key}>
-            <button
-              id="rooms-button"
-              onClick={() => this.props.changeRoom(room)}
-            >
+          <div key={room.key}>
+            <button onClick={() => this.props.changeRoom(room)}>
               {room.name}
             </button>
           </div>
         ))}
-        <form onSubmit={e => this.handleSubmit(e)}>
-          <input
-            id="submit-field"
-            type="text"
-            value={this.state.newRoom}
-            onChange={e => this.handleChange(e)}
-          />
-          <button className="btn btn-primary" onClick={this.createRoom}>
-            Submit
-          </button>
-        </form>
-      </div>
-      /*<div className="list-rooms">
-        <h2 className="rooms-header">Rooms</h2>
-        <ul>
-          {this.state.rooms.map(room => (
-            <li key={room.key}>{room.name}</li>
-          ))}
-        </ul>
         <form onSubmit={e => this.handleClick(e)}>
           <input
-            id="submit-text"
             type="text"
             value={this.state.newRoom}
             onChange={e => this.handleChange(e)}
           />
-          <button className="submit-button" onClick={this.createRoom}>
-            Submit
-          </button>
+          <button onClick={this.createRoom}>Submit</button>
         </form>
-      </div>*/
+      </div>
     );
   }
 }
