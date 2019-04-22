@@ -14,7 +14,7 @@ class RoomList extends Component {
     this.createRoom = this.createRoom.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.roomsRef.on("child_added", snapshot => {
       const room = snapshot.val();
       room.key = snapshot.key;

@@ -16,6 +16,18 @@ class MessageList extends Component {
     this.createMessage = this.createMessage.bind(this);
   }
 
+  componentDidMount() {
+    this.messageRef.on("child_added", snapshot => {
+      const msg = snapshot.val();
+      msg.key = snapshot.key;
+      this.setState({ messages: this.state.messages.concat(msg) });
+    });
+  }
+
+  componentDidUpdate() {
+    console.log(this.state);
+  }
+
   createMessage(e) {
     e.preventDefault();
     const newMsg = this.state.newMessage;
@@ -32,24 +44,18 @@ class MessageList extends Component {
     this.setState({ newMessage: e.target.value });
   }
 
-  componentDidMount() {
-    this.messageRef.on("child_added", snapshot => {
-      const msg = snapshot.val();
-      msg.key = snapshot.key;
-      this.setState({ messages: this.state.messages.concat(msg) });
-    });
-  }
-
   render() {
     return (
       <div>
         <h2>Messages</h2>
-        {this.state.groupedMessages.map(message => (
-          <div className="message" key={message.key}>
-            <p className="content">{message.content}</p>
-            <p className="sentAt">Sent at: {message.sentAt}</p>
-          </div>
-        ))}
+        {this.state.messages
+          .filter(message => message.roomId === this.props.activeRoom)
+          .map(message => (
+            <div className="message" key={message.key}>
+              <p className="content">{message.content}</p>
+              <p className="sentAt">Sent at: {message.sentAt}</p>
+            </div>
+          ))}
 
         <div>
           <form onSubmit={e => this.createMessage(e)}>
